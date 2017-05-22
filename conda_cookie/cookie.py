@@ -33,7 +33,7 @@ def get_user_info(field):
 
 def run_cmd(cmd):
     """Run shell command and check if successful."""
-    p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=sys.stdout) 
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=sys.stdout)
     p.wait()
     return p.returncode == 0
 
@@ -60,7 +60,7 @@ class Cookie(object):
         self.tests_path = os.path.join(self.project_path, 'tests')
         self.conda_recipe_path = os.path.join(self.project_path, 'conda-recipe')
         self.env_path = None
-        self.templates = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates/cookie')))
+        self.templates = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')))
         self.author = conf.get('author') or get_user_info('name')
         self.email = conf.get('email') or get_user_info('email')
         self.repo = None
@@ -115,7 +115,7 @@ class Cookie(object):
 
     def create_conda_env(self, python_ver):
         """Create project's conda environment."""
-        cmd = ["conda", "create", "-y", "-n", self.name, 
+        cmd = ["conda", "create", "-y", "-n", self.name,
                "python={}".format(python_ver), "ipython"]
         print("\n\nCreating conda environment...\n")
         if not run_cmd(cmd):

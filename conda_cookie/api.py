@@ -1,6 +1,5 @@
 import sys as _sys
 
-# make the Config class available in the api namespace
 from conda_cookie.cookie import Cookie, create_project_skeleton
 
 
