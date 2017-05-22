@@ -7,6 +7,6 @@
 *.pyd
 build
 dist
-{{ name }}.egg-info
+conda_cookie.egg-info/*
 __conda_version__.txt
 .cache/

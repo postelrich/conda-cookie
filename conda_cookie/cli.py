@@ -1,8 +1,7 @@
 import argparse
 import sys
-import conda_build.api as api
+import conda_cookie.api as api
 from attrdict import AttrDict
-from conda_build.config import Config
 
 
 def parse_args(args):
@@ -32,3 +31,7 @@ def execute(args):
 
 def main():
     execute(sys.argv[1:])
+
+
+if __name__ == '__main__':
+    main()
