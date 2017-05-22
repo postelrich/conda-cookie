@@ -1,0 +1,7 @@
+[run]
+omit =
+    conda-recipe/_version.py
+    conda-recipe/versioneer.py
+    conda-recipe/setup.py
+    conda-recipe/tests/test*
+    conda-recipe/*/tests/test*

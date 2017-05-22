@@ -1,0 +1,33 @@
+
+install:
+  # Install conda
+  - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update conda
+
+  # Install dependencies
+  - conda create -n conda_cookie python=$TRAVIS_PYTHON_VERSION pytest coverage 
+  - source activate conda_cookie
+    
+  # update setuptools and pip
+  - conda update setuptools pip
+
+  # Install coveralls
+  - pip install coveralls
+
+  # Install {{ name }} 
+  - pip install -e .[ci]
+
+script:
+  - conda list
+  - py.test conda_cookie
+
+after_success:
+  - coveralls
+
+notifications:
+  email: postelrich@gmail.com
+  on_success: "change"
+  on_failure: "always" # "change"

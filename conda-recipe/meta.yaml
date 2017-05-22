@@ -1,0 +1,28 @@
+package:
+  name: conda-cookie
+{% raw %}
+  version: {{ environ.get('GIT_DESCRIBE_TAG', '') }}
+
+build:
+  number: {{ environ.get('GIT_DESCRIBE_NUMBER', 0) }}
+{% endraw %}
+
+source:
+  git_url: ../
+
+requirements:
+  build:
+    - python
+    - setuptools
+  run:
+    - python
+
+test:
+  imports:
+    - conda-cookie
+  requires:
+    - pytest
+    - pytest-spec
+    - pytest-cov
+  commands:
+    py.test --cov=conda-cookie tests/
