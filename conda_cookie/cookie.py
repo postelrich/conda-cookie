@@ -64,6 +64,7 @@ class Cookie(object):
         self.author = conf.get('author') or get_user_info('name')
         self.email = conf.get('email') or get_user_info('email')
         self.repo = None
+        self.python_ver = conf.get('python')
 
     def create_base_files(self, dryrun=None):
         """Create all the template files for the project."""
@@ -111,12 +112,12 @@ class Cookie(object):
             self.init_git()
         self.repo.git.add(A=True)
         self.repo.index.commit("Initial commit by conda project!")
-        self.repo.create_tag("0.0.1", message='Initial tag by conda project!')
+        self.repo.create_tag("0.0.1", message='Initial tag by conda cookiecutter!')
 
-    def create_conda_env(self, python_ver):
+    def create_conda_env(self):
         """Create project's conda environment."""
         cmd = ["conda", "create", "-y", "-n", self.name,
-               "python={}".format(python_ver), "ipython"]
+               "python={}".format(self.python_ver), "ipython"]
         print("\n\nCreating conda environment...\n")
         if not run_cmd(cmd):
             raise Exception("See above for error")

@@ -15,6 +15,10 @@ versioning, setup.py, and more."""
                        help='name of project')
     cut_p.add_argument('path', metavar='PROJECT_PATH',
                        help='path where the project will be created')
+    cut_p.add_argument('--python', metavar='PYTHON_VER', default='3.6',
+                       help='Set the Python version used by conda.')
+    cut_p.add_argument('--github-ssh', action='store_true', default=False,
+                       help='Use ssh with Github.')
     args = p.parse_args(args)
     return p, args
 
